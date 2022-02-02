@@ -78,7 +78,9 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
 ```
-# In case of ""cni0" already has an IP address different from 10.244.0.1/24" error
+- In case of ""cni0" already has an IP address different from 10.244.0.1/24" error
+- This error occurs when you deploy a pod immediately after creating the Kubernetes cluster
+- You can either reboot the node, or run below commands to recreate the CNI
 ```bash
 ip link del cni0
 ip link del flannel.1
