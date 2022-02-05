@@ -1,4 +1,10 @@
 > Setup guide for single-node Kubernetes cluster with Flannel networking on RHEL8
+### Software Versions
+- RHEL 8.5
+- Conjur 12.4
+- CRI-O 1.23
+- Kubernetes 1.23
+
 # Install CRI-O
 ```console
 OS=CentOS_8_Stream
