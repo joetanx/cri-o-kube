@@ -15,7 +15,7 @@ yum -y install cri-o
 systemctl enable --now crio
 ```
 - Configure required kernel modules and tunables
-- Ref: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#letting-iptables-see-bridged-traffic
+- Ref: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#letting-iptables-see-bridged-traffic>
 ```console
 cat <<EOF >> /etc/modules-load.d/k8s.conf
 br_netfilter
@@ -29,10 +29,10 @@ EOF
 sysctl --system
 ```
 # Install kubeadm, kubelet and kubectl
-- Ref: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl
+- Ref: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl>
 - Note:
-  - CRI-O uses the systemd cgroup driver per default. Ref: https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cgroup-driver
-  - There are several ways to configure the cgroup driver, this guide configures it in `/etc/default/kubelet`. Ref: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/kubelet-integration/#the-kubelet-drop-in-file-for-systemd
+  - CRI-O uses the systemd cgroup driver per default. Ref: <https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cgroup-driver>
+  - There are several ways to configure the cgroup driver, this guide configures it in `/etc/default/kubelet`. Ref: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/kubelet-integration/#the-kubelet-drop-in-file-for-systemd>
 ```console
 cat <<EOF >> /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
@@ -53,8 +53,8 @@ EOF
 systemctl enable --now kubelet
 ```
 # Configure firewall
-- Ref: https://kubernetes.io/docs/reference/ports-and-protocols/
-- Ref: https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md#vxlan
+- Ref: <https://kubernetes.io/docs/reference/ports-and-protocols/>
+- Ref: <https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md#vxlan>
 ```console
 firewall-cmd --add-port 2379-2380/tcp --permanent
 firewall-cmd --add-port 6443/tcp --permanent
@@ -69,7 +69,7 @@ firewall-cmd --reload
 # Create Kubernetes Cluster
 - The `pull` command downloads the required container images, this is optional as the `init` command will also download the images if they are not already present
 - The `--pod-network-cidr` option for `init` command is required for Flannel networking
-- Ref: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+- Ref: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/>
 ```console
 kubeadm config images pull
 kubeadm init --pod-network-cidr 10.244.0.0/16
