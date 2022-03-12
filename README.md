@@ -27,6 +27,7 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
 ```
+
 # Install kubeadm, kubelet and kubectl
 - Ref: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl>
 - Note:
@@ -51,6 +52,7 @@ KUBELET_EXTRA_ARGS=--cgroup-driver=systemd --container-runtime=remote --containe
 EOF
 systemctl enable --now kubelet
 ```
+
 # Configure firewall
 - Ref: <https://kubernetes.io/docs/reference/ports-and-protocols/>
 - Ref: <https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md#vxlan>
@@ -65,7 +67,8 @@ firewall-cmd --add-port 30000-32767/tcp --permanent
 firewall-cmd --add-masquerade --permanent
 firewall-cmd --reload
 ```
-# Create Kubernetes Cluster
+
+# Create Kubernetes cluster
 - The `pull` command downloads the required container images, this is optional as the `init` command will also download the images if they are not already present
 - The `--pod-network-cidr` option for `init` command is required for Flannel networking
 - Ref: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/>
@@ -73,12 +76,14 @@ firewall-cmd --reload
 kubeadm config images pull
 kubeadm init --pod-network-cidr 10.244.0.0/16
 ```
+
 # Configure kubectl admin login and allow pods to run on master (single-node Kubernetes)
 ```console
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
+
 # Install Flannel networking
 ```console
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
