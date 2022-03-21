@@ -53,9 +53,6 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cl
 exclude=kubelet kubeadm kubectl
 EOF
 yum -y install kubelet kubeadm kubectl --disableexcludes=kubernetes
-cat <<EOF >> /etc/default/kubelet
-KUBELET_EXTRA_ARGS=--cgroup-driver=systemd --container-runtime=remote --container-runtime-endpoint="unix:///var/run/crio/crio.sock"
-EOF
 systemctl enable --now kubelet
 ```
 
