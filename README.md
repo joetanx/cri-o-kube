@@ -53,6 +53,11 @@ EOF
 systemctl enable --now kubelet
 ```
 
+# Optional - Clean-up Repository
+```console
+rm -f /etc/yum.repos.d/devel* /etc/yum.repos.d/kubernetes.repo
+```
+
 # Configure firewall
 - Ref: <https://kubernetes.io/docs/reference/ports-and-protocols/>
 - Ref: <https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md#vxlan>
