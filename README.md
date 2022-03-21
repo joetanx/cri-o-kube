@@ -13,7 +13,15 @@ curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo
 yum -y install cri-o
 systemctl enable --now crio
 ```
-- Configure required kernel modules and tunables
+
+# Disable swap and SELinux
+```console
+swapoff -a
+setenforce 0
+sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+```
+
+# Configure required kernel modules and tunables
 - Ref: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#letting-iptables-see-bridged-traffic>
 ```console
 cat <<EOF >> /etc/modules-load.d/k8s.conf
@@ -44,8 +52,6 @@ repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 exclude=kubelet kubeadm kubectl
 EOF
-setenforce 0
-sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 yum -y install kubelet kubeadm kubectl --disableexcludes=kubernetes
 cat <<EOF >> /etc/default/kubelet
 KUBELET_EXTRA_ARGS=--cgroup-driver=systemd --container-runtime=remote --container-runtime-endpoint="unix:///var/run/crio/crio.sock"
