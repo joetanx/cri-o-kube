@@ -1,13 +1,13 @@
 # Setup single-node Kubernetes cluster (with RHEL, CRI-O and Flannel)
 ### Software Versions
 - RHEL 8.5
-- CRI-O 1.23
-- Kubernetes 1.23
+- CRI-O 1.24
+- Kubernetes 1.24
 
 # Install CRI-O
 ```console
 OS=CentOS_8_Stream
-VERSION=1.23
+VERSION=1.24
 curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/devel:kubic:libcontainers:stable.repo
 curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$VERSION/$OS/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo
 yum -y install cri-o
